@@ -1,57 +1,33 @@
-const mongoose =require("mongoose");
+const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-    firstName: {
+    fname: {
         type: String,
         required: [true, "فیلد نام الزامی است"],
         lowercase: true,
         trim: true,
-        minLength: 11,
-        maxLength: 11
+        minLength: 3,
+        maxLength: 20
     },
-    lastName: {
+    lname: {
         type: String,
         required: [true, "فیلد نام خانوادگی الزامی است"],
         lowercase: true,
         trim: true,
+        minLength: 3,
+        maxLength: 50
     },
-    nationalId: {
+
+    amount: {
+        type: Number,
+        required: [true, "فیلد مبلغ الزامی است"],
+        trim: true
+    },
+    description: {
         type: String,
-        unique: true,
-        required: [true, "فیلد کد ملی الزامی است"],
-        trim: true,
-    },
-
-    payments: [{
-        amount: {
-            type: Number,
-            required: [true, "فیلد مبلغ الزامی است"],
-            trim: true
-        },
-        description: {
-            type: String,
-            required: [true, "فیلد توضیحات الزامی است"],
-            trim: true
-        },
-        resNum: {
-            type: String,
-            required: true,
-        },
-        refNum: {
-            type: String
-        },
-        traceNo: {
-            type: String
-        },
-        transactionStatus: {
-            type: String,
-            default: 'pending'
-        }
-    }]
-});
-
-schema.path('nationalId').validate(value => {
-    return value.match(/^\d{10}$/);
+        required: [true, "فیلد توضیحات الزامی است"],
+        trim: true
+    }
 });
 
 //custom static functions

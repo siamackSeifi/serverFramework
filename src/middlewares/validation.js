@@ -10,8 +10,7 @@ getSchemaObject = (schema, lang) => {
 
 exports.validation = (schema, property) => {
     return (req, res, next) => {
-        // return next();
-        let Schema = getSchemaObject(schema, req.headers.language);
+        let Schema = getSchemaObject(schema, req.headers.language || "en");
         const {error} = Schema.validate(req[property]);
         const valid = error == null;
         if (valid) {

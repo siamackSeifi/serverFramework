@@ -3,7 +3,8 @@ const UserModel = require("../models/userModel");
 const {responseGenerator} = require("../utilities/response");
 
 exports.authentication = async (req, res, next) => {
-    // return next();
+    // remove this line of code
+    return next();
     try {
         if (req.headers.authorization && req.headers.authorization.startsWith("Bearer ")) {
             const token = req.headers.authorization.replace("Bearer ", "");

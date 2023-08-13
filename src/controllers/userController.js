@@ -6,8 +6,18 @@ exports.getAllUsers = async(req, res) => {
         let user = await UserModel.find();
         return responseGenerator(req, res, 'success', user);
     } catch (e) {
-        console.log("err: " + e);
-        return res.status(500).json(e);
+        console.log(e.message);
+        return responseGenerator(req, res, 'internalServerError');
+    }
+};
+
+exports.addUser = async(req, res) => {
+    try {
+        let user = await UserModel.create(req.body);
+        return responseGenerator(req, res, 'success', user);
+    } catch (e) {
+        console.log(e.message);
+        return responseGenerator(req, res, 'internalServerError');
     }
 };
 
@@ -17,6 +27,7 @@ exports.test = async(req, res) => {
         return responseGenerator(req, res, 'success', user);
     }
     catch (e) {
-        return responseGenerator(req, res, e.message);
+        console.log(e.message);
+        return responseGenerator(req, res, 'internalServerError');
     }
 };

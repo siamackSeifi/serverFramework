@@ -21,20 +21,9 @@ const userController = require("../controllers/userController");
 User routes
 =============================================================================
 */
-// router.post("/user/password/forget", validator.body(user_validation.forgetPassword), userController.forgetPassword);
-// router.post("/user/password/verification", validator.body(user_validation.passwordVerification), userController.passwordVerification);
-// router.post("/user/password/reset", auth, userController.resetPassword);
-//
-// router.post("/user/login", validator.body(user_validation.login), userController.login);
-// router.post("/user/logout", auth, userController.logout);
-//
-// router.post("/user/register", validator.body(user_validation.register), userController.createUser);
-// router.post("/user/verification", userController.verifyCode);
-// router.post("/user/verification/send", userController.sendVerifyCode);
-//
-// router.post("/user/info", auth, userController.getInfo);
-// router.post("/user/get", validator.body(user_validation.getUser), userController.getUser);
-router.post("/user/all", authentication, authorization, validation("addUser", "body"), userController.getAllUsers);
+router.post("/user/add", authentication, authorization, validation("addUser", "body"), userController.addUser);
+router.get("/user/all", authentication, authorization, userController.getAllUsers);
+
 /*
 =============================================================================
 Xxx routes

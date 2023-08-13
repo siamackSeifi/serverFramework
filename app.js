@@ -1,5 +1,4 @@
 const express = require("express");
-const http = require("http");
 const apiRoutes = require("./src/routes/api");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
@@ -71,24 +70,14 @@ Array.prototype.filterField = function (key) {
     return tmp;
 };
 
-//Set paths and url for public purpose
-global.rootPath = __dirname + "/";
-global.assetsPath = __dirname + "/assets/";
-global.imagePath = __dirname + "/public/images/";
-global.viewPath = __dirname + "/public/views/";
-global.avatar = "uploads/avatar/";
-global.rootURL = "http://5.152.223.138:5000/";
-global.imageURL = rootURL + "images/";
-global.pageLimit = 10;
-global.searchLimit = 5;
 
 //Api server create and config
 const api = express();
 
 //secure my api's
 api.use(helmet());
-api.use(express.json({limit: "50mb"}));
-api.use(express.urlencoded({extended: true, limit: "50mb"}));
+api.use(express.json({limit: process.env.PAYLOAD_LIMIT}));
+api.use(express.urlencoded({extended: true, limit: process.env.PAYLOAD_LIMIT}));
 api.use(cookieParser());
 
 api.use("/uploads", /*auth,*/ express.static("uploads"));
